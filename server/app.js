@@ -1,28 +1,26 @@
-// app.js
+const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const path = require('path');
+const mongoose = require('mongoose');
 
-const acuarela = require('./routes/acuarela.route'); // Imports routes for the acuarelas
-const users = require('./routes/user.route');
-const app = express();
+const aquarelleRoutes = require('./routes/aquarelle.route'); // Imports routes for the acuarelas
+const usersRoutes = require('./routes/user.route');
+
 const port = process.env.PORT || 8080;
+const app = express();
 
 // Set up mongoose connection
-const mongoose = require('mongoose');
-let dev_db_url = 'mongodb://root:aquas@localhost:27017/aquas';
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+//const mongoDB = process.env.MONGODB_URI || 'mongodb://root:aquas@localhost:27017/aquas';
+const mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/aquarelles';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// app.use(cors());
 app.use(bodyParser.json());
-app.use('/acuarelas', acuarela);
-app.use('/users', users);
+app.use('/aquarelles', aquarelleRoutes);
+app.use('/users', usersRoutes);
 
 //if (process.env.NODE_ENV === 'production') {
 // Serve any static files

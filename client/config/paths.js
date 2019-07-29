@@ -79,7 +79,7 @@ module.exports = {
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'client/src/setupTests'),
   proxySetup: resolveApp('client/src/setupProxy.js'),
-  appNodeModules: resolveApp('client/node_modules'),
+  appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
